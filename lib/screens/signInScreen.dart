@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cookblog/custom_widgets/shadowButton.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:cookblog/screens/emailScreen.dart';
 
-class SignInScreen extends StatefulWidget {
-  @override
-  _SignInScreenState createState() => _SignInScreenState();
-}
-
-class _SignInScreenState extends State<SignInScreen> {
+class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +45,9 @@ class _SignInScreenState extends State<SignInScreen> {
               textSize: 22.5,
               width: 220,
               height: 48,
-              press: null,
+              press: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => EmailScreen(option: "Sign In")));
+              },
             ),
             GestureDetector(
               onTap: (){
@@ -71,3 +69,4 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 }
+

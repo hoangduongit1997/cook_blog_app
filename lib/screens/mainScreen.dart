@@ -2,12 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cookblog/custom_widgets/shadowButton.dart';
 import 'package:cookblog/screens/signUpScreen.dart';
 
-class MainScreen extends StatefulWidget {
-  @override
-  _MainScreenState createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
+class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,38 +13,39 @@ class _MainScreenState extends State<MainScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            new Text(
-              "The Cook Blog",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontFamily: "Segoe UI",
-                fontSize: 45,
-                color:Color(0xfff67300),
-              ),
+          new Text(
+            "The Cook Blog",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+            fontFamily: "Segoe UI",
+            fontSize: 45,
+            color:Color(0xfff67300),
             ),
-            new Container(
-              height: 316.50,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                image: AssetImage("assets/images/cook_blog.jpg"),
-                ),
-              ),
+          ),
+          new Container(
+            height: 316.50,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+              image: AssetImage("assets/images/cook_blog.jpg"),
             ),
-            ShadowButton(
-              icon: Icon(Icons.arrow_forward_ios , color: Color(0xfff67300) , size: 18.5),
-              text: 'Getting Started',
-              textSize: 22.5,
-              width: 225.0,
-              height: 54.0,
-              press: (){
-                Navigator.push(context , MaterialPageRoute(builder: (context) => SignUpScreen()));
-              },
-            ),
-          ],
+          ),
         ),
-      ),
-    );
-  }
+        ShadowButton(
+          icon: Icon(Icons.arrow_forward_ios , color: Color(0xfff67300) , size: 18.5),
+          text: 'Getting Started',
+          textSize: 22.5,
+          width: 225.0,
+          height: 54.0,
+          press: (){
+            Navigator.push(context , MaterialPageRoute(builder: (context) => SignUpScreen()));
+          },
+        ),
+      ],
+    ),
+  ),
+);
 }
+}
+
 
