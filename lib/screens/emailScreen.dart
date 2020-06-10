@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cookblog/custom_widgets/shadowButton.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cookblog/screens/itemsScreen.dart';
 
 class EmailScreen extends StatelessWidget {
   EmailScreen({@required this.option});
   final String option;
+  String email;
+  String password;
+  final _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,19 +28,10 @@ class EmailScreen extends StatelessWidget {
                 color:Color(0xfff67300),
               ),
             ),
-//            new Container(
-//              height: 154.00,
-//              width: 272.00,
-//              child: Row(
-//                mainAxisAlignment: MainAxisAlignment.center,
-//                children: <Widget>[
-//                  Icon(Icons.fastfood , color: Color(0xfff67300) , size: 42.5),
-//                  SizedBox(width: 10),
-//                  FaIcon(FontAwesomeIcons.signInAlt , color: Color(0xfff67300) , size: 42.5)
-//                ],
-//              ),
-//            ),
             TextField(
+              onChanged: (value){
+                email=value;
+              },
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 hintText: "Username",
@@ -55,6 +51,9 @@ class EmailScreen extends StatelessWidget {
               ),
             ),
             TextField(
+              onChanged: (value){
+                password = value;
+              },
               obscureText: true,
               decoration: InputDecoration(
                 hintText: "Password",
@@ -79,7 +78,19 @@ class EmailScreen extends StatelessWidget {
               textSize: 22.5,
               width: 210,
               height: 48,
-              press: null,
+              press: () async {
+                if(option == "Sign Up"){
+                  try{
+                    final newUser = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+                    if(newUser != null){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => ItemScreen()));
+                    }
+                  }
+                  catch(error){
+                    print(error);
+                  }
+                }
+              },
             ),
           ],
         )

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "164512568256",
+    "firebase_url": "https://cook-blog-83f55.firebaseio.com",
+    "project_id": "cook-blog-83f55",
+    "storage_bucket": "cook-blog-83f55.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:164512568256:android:a74c3c5ffa8f61cdc72e25",
+        "android_client_info": {
+          "package_name": "com.cybervenom003.cookblog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "164512568256-m5tobhgm97q3bao7qmfhnnor7ldknmqk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cybervenom003.cookblog",
+            "certificate_hash": "852f2a0f0eb34ab422c451d80b0f3f8c4c892a74"
+          }
+        },
+        {
+          "client_id": "164512568256-km4orbotd0anp30gjs1v1o3k5a740c6f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBBgokQ5k8xT-i57Q3loml3LyEhSztiMQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "164512568256-km4orbotd0anp30gjs1v1o3k5a740c6f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
