@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cookblog/custom_widgets/shadowButton.dart';
-import 'package:cookblog/screens/signUpScreen.dart';
 
 class MainScreen extends StatelessWidget {
   @override
@@ -38,7 +37,7 @@ class MainScreen extends StatelessWidget {
           width: 225.0,
           height: 54.0,
           press: (){
-            Navigator.push(context , MaterialPageRoute(builder: (context) => SignUpScreen()));
+            Navigator.pushNamed(context, 'Sign_Up_Screen');
           },
         ),
       ],

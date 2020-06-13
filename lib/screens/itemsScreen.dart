@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cookblog/custom_widgets/recipeCard.dart';
 import 'package:cookblog/custom_widgets/RecipeTag.dart';
 import 'package:cookblog/Utils/authService.dart';
+import 'package:cookblog/screens/signUpScreen.dart';
 
 class ItemScreen extends StatefulWidget {
   @override
@@ -78,7 +79,7 @@ class _ItemScreenState extends State<ItemScreen> {
               onTap: (){
                 AuthHandler().signOutUser();
                 Navigator.pop(context);
-                Navigator.pop(context);
+                Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=>SignUpScreen()), (route) => false);
               },
             ),
           ],
