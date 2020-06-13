@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:cookblog/screens/mainScreen.dart';
+import 'package:cookblog/screens/MainScreen.dart';
 
 void main() {
   runApp(MyApp());

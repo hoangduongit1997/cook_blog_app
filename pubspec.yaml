@@ -31,6 +31,7 @@ dependencies:
   smooth_star_rating: ^1.1.1
   firebase_auth: ^0.16.1
   firebase_core: ^0.4.5
+  google_sign_in: ^4.5.1
 
 dev_dependencies:
   flutter_test:

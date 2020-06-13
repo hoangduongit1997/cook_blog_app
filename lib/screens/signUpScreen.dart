@@ -3,8 +3,10 @@ import 'package:cookblog/custom_widgets/shadowButton.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cookblog/screens/signInScreen.dart';
 import 'package:cookblog/screens/emailScreen.dart';
+import 'package:cookblog/Utils/authService.dart';
 
 class SignUpScreen extends StatelessWidget {
+  AuthHandler authenticationService = AuthHandler();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +40,9 @@ class SignUpScreen extends StatelessWidget {
               textSize: 22.5,
               width: 220,
               height: 48,
-              press: null,
+              press: (){
+
+              },
             ),
             ShadowButton(
               icon: Icon(Icons.mail , color: Color(0xfff67300) , size: 22.5),

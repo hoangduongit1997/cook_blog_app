@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cookblog/custom_widgets/recipeCard.dart';
 import 'package:cookblog/custom_widgets/RecipeTag.dart';
+import 'package:cookblog/Utils/authService.dart';
 
 class ItemScreen extends StatefulWidget {
   @override
@@ -8,16 +9,21 @@ class ItemScreen extends StatefulWidget {
 }
 
 class _ItemScreenState extends State<ItemScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Color(0xFFFCF3EE),
       appBar: AppBar(
         backgroundColor: Color(0xFFFCF3EE),
         elevation: 2.5,
         leading: IconButton(
           icon: Icon(Icons.sort , color: Color(0xFFF67300) , size: 35),
-          onPressed: null,
+          onPressed: (){
+            _scaffoldKey.currentState.openDrawer();
+          },
         ),
         title: Center(
           child: Row(
@@ -40,8 +46,46 @@ class _ItemScreenState extends State<ItemScreen> {
           )
         ],
       ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/drawer_wallpaper.jpg"),
+                ),
+              ),
+              child: Text(
+                'The Cook Blog',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.favorite),
+              title: Text('Your favourites'),
+            ),
+            ListTile(
+              leading: Icon(Icons.account_circle),
+              title: Text('Account'),
+            ),
+            ListTile(
+              leading: Icon(Icons.exit_to_app),
+              title: Text('Log Out'),
+              onTap: (){
+                AuthHandler().signOutUser();
+                Navigator.pop(context);
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
       body: Padding(
-        padding: EdgeInsets.fromLTRB(32.5, 7.5, 2.5, 5),
+        padding: EdgeInsets.only(left: 15 , top: 5 , right: 7.5 , bottom: 5),
         child: Container(
           child: ListView(
             children: <Widget>[

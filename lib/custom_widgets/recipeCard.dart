@@ -87,11 +87,11 @@ class RecipeCard extends StatelessWidget {
             ),
           ),
           Transform.translate(
-            offset: Offset(185, 12.0),
+            offset: Offset(177.5, 12.0),
             child:
             // Adobe XD layer: 'kadai-paneer-gravy-…' (shape)
             Container(
-              width: 150.0,
+              width: 147.5,
               height: 141.0,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(21.0),
