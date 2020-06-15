@@ -3,27 +3,25 @@ import 'package:cookblog/custom_widgets/shadowButton.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-enum Gender { Male , Female , Prefer_not_to_say }
 
 class RegistrationScreen extends StatefulWidget {
-  RegistrationScreen({@required this.user});
-  final FirebaseUser user;
   @override
-  _RegistrationScreenState createState() => _RegistrationScreenState(user: user);
+  _RegistrationScreenState createState() => _RegistrationScreenState();
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-  _RegistrationScreenState({@required this.user});
-  final FirebaseUser user;
   TextEditingController _nameControl = TextEditingController(text: "");
-  Gender gender = Gender.Male;
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  FirebaseUser user;
+  void getCurrentUser() async {
+    user = await _auth.currentUser();
+  }
   List<bool> check_value = [false , false ,false ,false ,false ,false ,false ,false ,false ,false , false ,false];
   List<String> available_cuisines = ['Continental' , 'Chinese' , 'Punjabi' , 'South Indian' , 'Thai','Goan' , 'Mughal' , 'Gujarati' , 'Rajasthani' , 'Maharashtarian' , 'Bengali' , 'North Indian'];
   List<String> favourite_cuisines = [];
   String _gender = "Male";
   Firestore _firestore = Firestore.instance;
   List<Widget> CheckBoxBuilder(){
-    int i = 0;
     List<Widget> Check_List = [];
     for (int i = 0 ; i < 12 ; ++i){
       Check_List.add(CheckboxListTile(
@@ -50,10 +48,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           'Gender': _gender,
           'Favourite Cuisines': favourite_cuisines,
         });
+        _nameControl.dispose();
         Navigator.pushNamed(context, 'Item_Screen');
       })
     );
     return Check_List;
+  }
+  @override
+  void initState() {
+    super.initState();
+    getCurrentUser();
   }
   @override
   Widget build(BuildContext context) {

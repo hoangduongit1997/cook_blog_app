@@ -3,7 +3,6 @@ import 'package:cookblog/custom_widgets/shadowButton.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cookblog/screens/emailScreen.dart';
 import 'package:cookblog/Utils/authService.dart';
-import 'package:cookblog/screens/registrationScreen.dart';
 
 class SignUpScreen extends StatelessWidget {
   AuthHandler authenticationService = AuthHandler();
@@ -84,7 +83,7 @@ class SignUpScreen extends StatelessWidget {
                   createAlertDialog(context);
                 }
                 else{
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>RegistrationScreen(user: authenticationService.user)));
+                  Navigator.pushNamed(context, 'Regis_Screen');
                 }
               },
             ),

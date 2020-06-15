@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cookblog/custom_widgets/shadowButton.dart';
 import 'package:cookblog/Utils/authService.dart';
-import 'package:cookblog/screens/registrationScreen.dart';
 
 class EmailScreen extends StatefulWidget {
   EmailScreen({@required this.option});
@@ -154,7 +153,9 @@ class _EmailScreenState extends State<EmailScreen> {
                           setState(() {
                             isLoading = false;
                           });
-                          Navigator.push(context , MaterialPageRoute(builder: (context)=>RegistrationScreen(user: AuthService.user)));
+                          _emailController.dispose();
+                          _passwordController.dispose();
+                          Navigator.pushNamed(context, 'Regis_Screen');
                         }
                       }
                       catch(error){

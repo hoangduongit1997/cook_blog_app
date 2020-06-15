@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cookblog/custom_widgets/recipeCard.dart';
 import 'package:cookblog/custom_widgets/RecipeTag.dart';
-import 'package:cookblog/Utils/authService.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cookblog/screens/signUpScreen.dart';
 
 class ItemScreen extends StatefulWidget {
@@ -10,8 +10,8 @@ class ItemScreen extends StatefulWidget {
 }
 
 class _ItemScreenState extends State<ItemScreen> {
+  FirebaseAuth _auth = FirebaseAuth.instance;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,13 +77,20 @@ class _ItemScreenState extends State<ItemScreen> {
               leading: Icon(Icons.exit_to_app),
               title: Text('Log Out'),
               onTap: (){
-                AuthHandler().signOutUser();
+               _auth.signOut();
                 Navigator.pop(context);
                 Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=>SignUpScreen()), (route) => false);
               },
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+          onPressed: (){
+            Navigator.pushNamed(context, 'New_Recipe');
+          },
+          child: Icon(Icons.playlist_add),
+          tooltip: 'Give us a new recipe!'
       ),
       body: Padding(
         padding: EdgeInsets.only(left: 15 , top: 5 , right: 7.5 , bottom: 5),

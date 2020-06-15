@@ -1,3 +1,4 @@
+import 'package:cookblog/screens/newRecipeScreen.dart';
 import 'package:cookblog/screens/registrationScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:cookblog/screens/mainScreen.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.deepOrange,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: AuthCheck(),
@@ -26,6 +27,8 @@ class MyApp extends StatelessWidget {
         'Sign_Up_Screen': (context)=>SignUpScreen(),
         'Sign_In_Screen': (context)=>SignInScreen(),
         'Item_Screen': (context)=>ItemScreen(),
+        'Regis_Screen': (context)=>RegistrationScreen(),
+        'New_Recipe': (context)=>NewRecipe(),
       },
     );
   }
