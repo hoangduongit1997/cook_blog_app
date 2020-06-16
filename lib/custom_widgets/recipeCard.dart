@@ -1,6 +1,6 @@
 import 'package:cookblog/custom_widgets/RecipeTag.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/rendering.dart';
 
 class RecipeCard extends StatelessWidget {
   const RecipeCard({@required this.recipe, @required this.cookName, @required this.dishImage, @required this.openFunc , @required this.rating , @required this.cuisineTag , @required this.likes});
