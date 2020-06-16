@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cookblog/custom_widgets/recipeCard.dart';
-import 'package:cookblog/custom_widgets/RecipeTag.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cookblog/screens/signUpScreen.dart';
 
@@ -11,7 +11,22 @@ class ItemScreen extends StatefulWidget {
 
 class _ItemScreenState extends State<ItemScreen> {
   FirebaseAuth _auth = FirebaseAuth.instance;
+  Firestore _firestore = Firestore.instance;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  List<Widget> recipeCards = [];
+//  void getRecipes() async {
+//    final recipes = await _firestore.collection("recipes").getDocuments();
+//    for(var recipe in recipes.documents){
+//      print(recipe.data);
+//    }
+//  }
+//  void recipeStream() async {
+//    await for (var snapshots in _firestore.collection("recipes").snapshots()){
+//      for(var recipe in snapshots.documents){
+//        print(recipe.data);
+//      }
+//    }
+//  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +58,7 @@ class _ItemScreenState extends State<ItemScreen> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.search , color: Color(0xFFF67300) , size: 35),
-            onPressed: null,
+            onPressed: null
           )
         ],
       ),
@@ -95,48 +110,30 @@ class _ItemScreenState extends State<ItemScreen> {
       body: Padding(
         padding: EdgeInsets.only(left: 15 , top: 5 , right: 7.5 , bottom: 5),
         child: Container(
-          child: ListView(
-            children: <Widget>[
-              RecipeCard(
-                recipe: "Capsicum pizza with tabasco sauce",
-                dishImage: "",
-                cookName: "Tanish Agrawal",
-                openFunc: null,
-                ratingFunc: null,
-                tagList: <Widget>[
-                  RecipeTag(
-                    tagName: "Indian",
-                  )
-                ],
-              ),
-              SizedBox(height: 10),
-              RecipeCard(
-                recipe: "Kadhai Paneer",
-                dishImage: "",
-                cookName: "Vrishabh Agamya",
-                openFunc: null,
-                ratingFunc: null,
-                tagList: <Widget>[
-                  RecipeTag(
-                    tagName: "Indian",
-                  )
-                ],
-              ),
-              SizedBox(height: 10),
-              RecipeCard(
-                recipe: "Kadhai Paneer",
-                dishImage: "",
-                cookName: "Vrishabh Agamya",
-                openFunc: null,
-                ratingFunc: null,
-                tagList: <Widget>[
-                  RecipeTag(
-                    tagName: "Indian",
-                  )
-                ],
-              ),
-            ],
-          ),
+            child: StreamBuilder<QuerySnapshot>(
+              stream: _firestore.collection("recipes").snapshots(),
+              builder: (context , snapshot){
+                if(snapshot.hasData){
+                  final recipes = snapshot.data.documents;
+                  List<Widget> recipeCards = [];
+                  for(var recipe in recipes){
+                    final recipeName = recipe.documentID;
+                    final cookName = recipe.data["Cook Name"];
+                    final cuisineName = recipe.data["Cuisine"];
+                    final dishImage = recipe.data["imageURL"];
+                    final rating = recipe.data["Avg Rating"];
+                    final Rating = rating.toDouble();
+                    final likes = recipe.data["Likes"];
+                    final card = RecipeCard(recipe: recipeName, cookName: cookName, dishImage: dishImage, openFunc: null , cuisineTag: cuisineName , rating: Rating , likes: likes);
+                    recipeCards.add(card);
+                    recipeCards.add(SizedBox(height: 15));
+                  }
+                  return ListView(
+                    children: recipeCards,
+                  );
+                }
+              },
+            )
         ),
       ),
     );

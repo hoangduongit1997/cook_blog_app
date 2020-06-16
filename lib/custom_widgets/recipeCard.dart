@@ -1,14 +1,16 @@
+import 'package:cookblog/custom_widgets/RecipeTag.dart';
 import 'package:flutter/material.dart';
-import 'package:smooth_star_rating/smooth_star_rating.dart';
+
 
 class RecipeCard extends StatelessWidget {
-  const RecipeCard({@required this.recipe, @required this.cookName, @required this.dishImage, @required this.openFunc , @required this.ratingFunc , this.tagList});
+  const RecipeCard({@required this.recipe, @required this.cookName, @required this.dishImage, @required this.openFunc , @required this.rating , @required this.cuisineTag , @required this.likes});
   final Function openFunc;
   final String recipe;
   final String cookName;
   final String dishImage;
-  final Function ratingFunc;
-  final List<Widget> tagList;
+  final double rating;
+  final String cuisineTag;
+  final int likes;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -82,8 +84,11 @@ class RecipeCard extends StatelessWidget {
           Transform.translate(
             offset: Offset(2 , 174.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: tagList,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                SizedBox(width: 12.5),
+                RecipeTag(tagName: cuisineTag),
+              ],
             ),
           ),
           Transform.translate(
@@ -96,7 +101,7 @@ class RecipeCard extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(21.0),
                 image: DecorationImage(
-                  image: AssetImage(dishImage),
+                  image: NetworkImage(dishImage),
                   fit: BoxFit.fill,
                 ),
                 border: Border.all(width: 1.5, color: const Color(0xfff67300)),
@@ -106,21 +111,53 @@ class RecipeCard extends StatelessWidget {
           Transform.translate(
             offset: Offset(17.0 , 214.0),
             child: SizedBox(
-              width: 184,
+              width: 284,
               height: 44,
-              child: SmoothStarRating(
-                  allowHalfRating: true,
-                  onRated: ratingFunc,
-                  starCount: 5,
-                  rating: 2.5,
-                  size: 35,
-                  isReadOnly:false,
-                  filledIconData: Icons.star,
-                  halfFilledIconData: Icons.star_half,
-                  color: const Color(0xfff67300),
-                  borderColor: const Color(0xfff67300),
-                  spacing:0.0
-              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Text(
+                    "Rating:  ",
+                    style: TextStyle(
+                      fontFamily: 'Segoe UI',
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: const Color(0xff000000),
+                    ),
+                  ),
+                  Text(
+                    "$rating",
+                    style: TextStyle(
+                      fontFamily: 'Segoe UI',
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      color: const Color(0xfff67300),
+                    ),
+                  ),
+                  Icon(Icons.star_half , size: 27.5 , color: Color(0xfff67300)),
+                  SizedBox(width: 15),
+                  Text(
+                    "Likes:  ",
+                    style: TextStyle(
+                      fontFamily: 'Segoe UI',
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: const Color(0xff000000),
+                    ),
+                  ),
+                  Text(
+                    "$likes",
+                    style: TextStyle(
+                      fontFamily: 'Segoe UI',
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      color: const Color(0xffff1418),
+                    ),
+                  ),
+                  Icon(Icons.favorite , size: 27.5 , color: Color(0xffff1418)),
+                ],
+              )
             ),
           )
         ],

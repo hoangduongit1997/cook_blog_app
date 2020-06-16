@@ -6,7 +6,7 @@ class RecipeTag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 67.5,
+      width: 77.5,
       height: 30.0,
       child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
