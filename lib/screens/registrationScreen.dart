@@ -49,7 +49,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           'Favourite Cuisines': favourite_cuisines,
         });
         _nameControl.dispose();
-        Navigator.pushNamed(context, 'Item_Screen');
+        Navigator.of(context).pushNamedAndRemoveUntil('Item_Screen', (route) => false);
       })
     );
     return Check_List;

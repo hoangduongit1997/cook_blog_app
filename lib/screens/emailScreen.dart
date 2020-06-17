@@ -181,7 +181,7 @@ class _EmailScreenState extends State<EmailScreen> {
                           setState(() {
                             isLoading = false;
                           });
-                          Navigator.pushNamed(context, 'Item_Screen');
+                          Navigator.of(context).pushNamedAndRemoveUntil('Item_Screen', (route) => false);
                         }
                       }
                       catch(error){

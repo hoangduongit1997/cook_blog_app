@@ -1,3 +1,4 @@
+import 'package:cookblog/screens/recipeDetails.dart';
 import 'package:flutter/material.dart';
 import 'package:cookblog/custom_widgets/recipeCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -14,19 +15,6 @@ class _ItemScreenState extends State<ItemScreen> {
   Firestore _firestore = Firestore.instance;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   List<Widget> recipeCards = [];
-//  void getRecipes() async {
-//    final recipes = await _firestore.collection("recipes").getDocuments();
-//    for(var recipe in recipes.documents){
-//      print(recipe.data);
-//    }
-//  }
-//  void recipeStream() async {
-//    await for (var snapshots in _firestore.collection("recipes").snapshots()){
-//      for(var recipe in snapshots.documents){
-//        print(recipe.data);
-//      }
-//    }
-//  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,16 +108,36 @@ class _ItemScreenState extends State<ItemScreen> {
                     final recipeName = recipe.documentID;
                     final cookName = recipe.data["Cook Name"];
                     final cuisineName = recipe.data["Cuisine"];
+                    final ingredients = recipe.data["Ingredients"];
+                    final time = recipe.data["Cooking Duration"];
+                    final instructions = recipe.data["Instructions"];
                     final dishImage = recipe.data["imageURL"];
                     final rating = recipe.data["Avg Rating"];
                     final Rating = rating.toDouble();
                     final likes = recipe.data["Likes"];
-                    final card = RecipeCard(recipe: recipeName, cookName: cookName, dishImage: dishImage, openFunc: null , cuisineTag: cuisineName , rating: Rating , likes: likes);
+                    final card = RecipeCard(
+                        recipe: recipeName,
+                        cookName: cookName,
+                        dishImage: dishImage,
+                        openFunc: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>RecipeDetails(recipeName: recipeName, ingredients: ingredients , duration: time , instructions: instructions , recipeCuisine: cuisineName, cookName: cookName, dishImage: dishImage, rating: Rating, likes: likes)));
+                        },
+                        cuisineTag: cuisineName ,
+                        rating: Rating ,
+                        likes: likes
+                    );
                     recipeCards.add(card);
                     recipeCards.add(SizedBox(height: 15));
                   }
                   return ListView(
                     children: recipeCards,
+                  );
+                }
+                else{
+                  return Center(
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFF67300)),
+                    ),
                   );
                 }
               },

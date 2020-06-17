@@ -84,7 +84,7 @@ class SignInScreen extends StatelessWidget {
                   createAlertDialog(context);
                 }
                 else {
-                  Navigator.pushNamed(context, 'Item_Screen');
+                  Navigator.of(context).pushNamedAndRemoveUntil('Item_Screen', (route) => false);
                 }
               }
             ),

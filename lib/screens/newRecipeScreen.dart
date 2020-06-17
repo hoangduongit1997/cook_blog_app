@@ -458,9 +458,10 @@ class _UploaderState extends State<Uploader> {
       "Cooking Duration": duration,
       "Cuisine": recipe_cuisine,
       "Ingredients": ingredients,
+      "Instructions": instructions,
       "imageURL": url,
       "Likes": 0,
-      "Avg Rating": 4,
+      "Avg Rating": 3.5,
     });
     _firestore.collection("cuisines").document(recipe_cuisine).collection("recipes").document(recipeName).setData({
       "Name": recipeName,
@@ -468,9 +469,10 @@ class _UploaderState extends State<Uploader> {
       "Cooking Duration": duration,
       "Cuisine": recipe_cuisine,
       "Ingredients": ingredients,
+      "Instructions": instructions,
       "imageURL": url,
       "Likes": 0,
-      "Avg Rating": 4,
+      "Avg Rating": 3.5,
     });
   }
   @override
