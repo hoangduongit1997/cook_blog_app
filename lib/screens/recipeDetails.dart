@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class RecipeDetails extends StatefulWidget {
   RecipeDetails({@required this.recipeName , @required this.duration , @required this.instructions , @required this.ingredients , @required this.recipeCuisine , @required this.cookName , @required this.dishImage , @required this.rating , @required this.likes});
@@ -19,12 +20,19 @@ class RecipeDetails extends StatefulWidget {
 
 class _RecipeDetailsState extends State<RecipeDetails> {
   Firestore _firestore = Firestore.instance;
-  int newLikes;
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  String email;
+  int newLikes = 0;
   double userRating = 0;
   bool userLikeStatus = false;
   List<String> ingredientNames = [];
   List<String> ingredientQuantities = [];
   IconData likeIcon = Icons.favorite_border;
+  void getEmail() async {
+    FirebaseUser user = await _auth.currentUser();
+    email = user.email;
+    checkIfLike(email);
+  }
   void getIngredientList(){
     for(var ingredient in widget.ingredients.keys){
       ingredientNames.add(ingredient);
@@ -61,19 +69,82 @@ class _RecipeDetailsState extends State<RecipeDetails> {
     return rows;
   }
   void updateFirestore(){
-    _firestore.collection("recipes").document(widget.recipeName).updateData({
-      "Avg Rating":(widget.rating + userRating)/2,
-      "Likes": widget.likes+newLikes,
-    });
-    _firestore.collection("cuisines").document(widget.recipeCuisine).collection("recipes").document(widget.recipeName).updateData({
-      "Avg Rating":(widget.rating + userRating)/2,
-      "Likes": widget.likes+newLikes,
-    });
+    if(userRating != 0){
+      _firestore.collection("recipes").document(widget.recipeName).updateData({
+        "Avg Rating":(widget.rating + userRating)/2,
+        "Likes": newLikes,
+      });
+      _firestore.collection("cuisines").document(widget.recipeCuisine).collection("recipes").document(widget.recipeName).updateData({
+        "Avg Rating":(widget.rating + userRating)/2,
+        "Likes": newLikes,
+      });
+    }
+    else{
+      _firestore.collection("recipes").document(widget.recipeName).updateData({
+        "Avg Rating":widget.rating,
+        "Likes": newLikes,
+      });
+      _firestore.collection("cuisines").document(widget.recipeCuisine).collection("recipes").document(widget.recipeName).updateData({
+        "Avg Rating":widget.rating,
+        "Likes": newLikes,
+      });
+    }
+  }
+  void addUserLiked(){
+    if(userRating != 0){
+      _firestore.collection("users").document(email).collection("Liked Recipes").document(widget.recipeName).setData({
+        "Name": widget.recipeName,
+        "Cook Name": widget.cookName,
+        "Cooking Duration": widget.duration,
+        "Cuisine": widget.recipeCuisine,
+        "Ingredients": widget.ingredients,
+        "Instructions": widget.instructions,
+        "imageURL": widget.dishImage,
+        "Likes": newLikes,
+        "User Rating": userRating,
+        "Avg Rating": (widget.rating + userRating)/2,
+      });
+    }
+    else{
+      _firestore.collection("users").document(email).collection("Liked Recipes").document(widget.recipeName).setData({
+        "Name": widget.recipeName,
+        "Cook Name": widget.cookName,
+        "Cooking Duration": widget.duration,
+        "Cuisine": widget.recipeCuisine,
+        "Ingredients": widget.ingredients,
+        "Instructions": widget.instructions,
+        "imageURL": widget.dishImage,
+        "Likes": newLikes,
+        "User Rating": 0,
+        "Avg Rating": widget.rating,
+      });
+    }
+  }
+  void deleteUserLikes(){
+    _firestore.collection("users").document(email).collection("Liked Recipes").document(widget.recipeName).delete();
+  }
+  void checkIfLike(String Email)async{
+    final likedRecipes = await _firestore.collection("users").document(Email).collection("Liked Recipes").getDocuments();
+    for(var recipes in likedRecipes.documents){
+      if(widget.recipeName == recipes.documentID){
+        setState(() {
+          userLikeStatus = true;
+          likeIcon = Icons.favorite;
+        });
+        print(userLikeStatus);
+        return;
+      }
+    }
   }
   @override
   void initState() {
-    super.initState();
     getIngredientList();
+    getEmail();
+    newLikes = widget.likes;
+  }
+  @override
+  void deactivate() {
+    updateFirestore();
   }
   @override
   Widget build(BuildContext context) {
@@ -270,24 +341,23 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                 IconButton(
                     icon: Icon(likeIcon , size: 30 , color: Color(0xffff1418)),
                     onPressed: (){
-                      newLikes = widget.likes;
                       if(userLikeStatus == false){
                         setState(() {
                           userLikeStatus = true;
                           newLikes++;
                           likeIcon = Icons.favorite;
-                          updateFirestore();
                         });
-                        return;
+                        addUserLiked();
                       }
                       else if (userLikeStatus == true){
                         setState(() {
                           userLikeStatus = false;
                           newLikes--;
                           likeIcon = Icons.favorite_border;
-                          updateFirestore();
                         });
+                        deleteUserLikes();
                       }
+
                     }
                 )
               ],
