@@ -476,6 +476,18 @@ class _UploaderState extends State<Uploader> {
       "Avg Rating": 3.5,
       "Post Time": DateTime.now(),
     });
+    _firestore.collection("users").document(user.email).collection("My Recipes").document(recipeName).setData({
+      "Name": recipeName,
+      "Cook Name": UserName,
+      "Cooking Duration": duration,
+      "Cuisine": recipe_cuisine,
+      "Ingredients": ingredients,
+      "Instructions": instructions,
+      "imageURL": url,
+      "Likes": 0,
+      "Avg Rating": 3.5,
+      "Post Time": DateTime.now(),
+    });
   }
   @override
   void initState() {

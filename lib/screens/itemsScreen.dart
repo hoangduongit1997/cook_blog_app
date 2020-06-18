@@ -80,6 +80,9 @@ class _ItemScreenState extends State<ItemScreen> {
                     fontFamily: "Segoe UI",
                   ),
               ),
+              onTap: (){
+                Navigator.pushNamed(context, 'user_favs');
+              },
             ),
             ListTile(
               leading: Icon(Icons.account_circle , color: Color(0xFFF67300) , size: 25),
@@ -91,6 +94,9 @@ class _ItemScreenState extends State<ItemScreen> {
                     fontFamily: "Segoe UI",
                 ),
               ),
+              onTap: (){
+                Navigator.pushNamed(context, 'user_Details');
+              },
             ),
             ListTile(
               leading: Icon(Icons.exit_to_app , color: Color(0xFF00a819) , size: 25),

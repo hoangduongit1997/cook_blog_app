@@ -105,6 +105,7 @@ class _RecipeDetailsState extends State<RecipeDetails> {
         "User Rating": userRating,
         "Avg Rating": (widget.rating + userRating)/2,
         "Post Time": widget.postTime,
+        "Liked Time": DateTime.now(),
       });
     }
     else{
@@ -120,6 +121,7 @@ class _RecipeDetailsState extends State<RecipeDetails> {
         "User Rating": 0,
         "Avg Rating": widget.rating,
         "Post Time": widget.postTime,
+        "Liked Time": DateTime.now(),
       });
     }
   }

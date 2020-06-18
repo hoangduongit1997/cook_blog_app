@@ -18,10 +18,15 @@ class _EmailScreenState extends State<EmailScreen> {
   bool isLoading = false;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _emailController = TextEditingController(text: "");
     _passwordController = TextEditingController(text: "");
+  }
+  @override
+  void deactivate() {
+    super.deactivate();
+    _emailController.dispose();
+    _passwordController.dispose();
   }
   final AuthHandler AuthService = AuthHandler();
   createAlertDialog(BuildContext context){
@@ -153,8 +158,6 @@ class _EmailScreenState extends State<EmailScreen> {
                           setState(() {
                             isLoading = false;
                           });
-                          _emailController.dispose();
-                          _passwordController.dispose();
                           Navigator.pushNamed(context, 'Regis_Screen');
                         }
                       }
