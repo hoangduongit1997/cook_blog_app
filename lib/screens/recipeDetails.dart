@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class RecipeDetails extends StatefulWidget {
-  RecipeDetails({@required this.recipeName , @required this.duration , @required this.instructions , @required this.ingredients , @required this.recipeCuisine , @required this.cookName , @required this.dishImage , @required this.rating , @required this.likes});
+  RecipeDetails({@required this.recipeName , @required this.duration , @required this.instructions , @required this.ingredients , @required this.recipeCuisine , @required this.cookName , @required this.dishImage , @required this.rating , @required this.likes , @required this.postTime});
   final String recipeName;
   final String recipeCuisine;
   final dynamic ingredients;
@@ -14,6 +14,7 @@ class RecipeDetails extends StatefulWidget {
   final String dishImage;
   final double rating;
   final int likes;
+  final dynamic postTime;
   @override
   _RecipeDetailsState createState() => _RecipeDetailsState();
 }
@@ -103,6 +104,7 @@ class _RecipeDetailsState extends State<RecipeDetails> {
         "Likes": newLikes,
         "User Rating": userRating,
         "Avg Rating": (widget.rating + userRating)/2,
+        "Post Time": widget.postTime,
       });
     }
     else{
@@ -117,6 +119,7 @@ class _RecipeDetailsState extends State<RecipeDetails> {
         "Likes": newLikes,
         "User Rating": 0,
         "Avg Rating": widget.rating,
+        "Post Time": widget.postTime,
       });
     }
   }

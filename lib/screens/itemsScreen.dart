@@ -57,6 +57,7 @@ class _ItemScreenState extends State<ItemScreen> {
             DrawerHeader(
               decoration: BoxDecoration(
                 image: DecorationImage(
+                  fit: BoxFit.cover,
                   image: AssetImage("assets/images/drawer_wallpaper.jpg"),
                 ),
               ),
@@ -64,21 +65,43 @@ class _ItemScreenState extends State<ItemScreen> {
                 'The Cook Blog',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 24,
+                  fontSize: 25,
+                  fontFamily: "Segoe UI",
                 ),
               ),
             ),
             ListTile(
-              leading: Icon(Icons.favorite),
-              title: Text('Your favourites'),
+              leading: Icon(Icons.favorite , color: Color(0xffff1418), size: 25),
+              title: Text(
+                  'Your favourites',
+                  style: TextStyle(
+                    fontSize: 17.5,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: "Segoe UI",
+                  ),
+              ),
             ),
             ListTile(
-              leading: Icon(Icons.account_circle),
-              title: Text('Account'),
+              leading: Icon(Icons.account_circle , color: Color(0xFFF67300) , size: 25),
+              title: Text(
+                  'Account',
+                  style: TextStyle(
+                    fontSize: 17.5,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: "Segoe UI",
+                ),
+              ),
             ),
             ListTile(
-              leading: Icon(Icons.exit_to_app),
-              title: Text('Log Out'),
+              leading: Icon(Icons.exit_to_app , color: Color(0xFF00a819) , size: 25),
+              title: Text(
+                  'Log Out',
+                  style: TextStyle(
+                    fontSize: 17.5,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: "Segoe UI",
+                ),
+              ),
               onTap: (){
                _auth.signOut();
                 Navigator.pop(context);
@@ -99,7 +122,7 @@ class _ItemScreenState extends State<ItemScreen> {
         padding: EdgeInsets.only(left: 15 , top: 5 , right: 7.5 , bottom: 5),
         child: Container(
             child: StreamBuilder<QuerySnapshot>(
-              stream: _firestore.collection("recipes").snapshots(),
+              stream: _firestore.collection("recipes").orderBy("Post Time" , descending: true).snapshots(),
               builder: (context , snapshot){
                 if(snapshot.hasData){
                   final recipes = snapshot.data.documents;
@@ -115,12 +138,13 @@ class _ItemScreenState extends State<ItemScreen> {
                     final rating = recipe.data["Avg Rating"];
                     final Rating = rating.toDouble();
                     final likes = recipe.data["Likes"];
+                    final postTime = recipe.data["Post Time"];
                     final card = RecipeCard(
                         recipe: recipeName,
                         cookName: cookName,
                         dishImage: dishImage,
                         openFunc: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>RecipeDetails(recipeName: recipeName, ingredients: ingredients , duration: time , instructions: instructions , recipeCuisine: cuisineName, cookName: cookName, dishImage: dishImage, rating: Rating, likes: likes)));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>RecipeDetails(recipeName: recipeName, ingredients: ingredients , duration: time , instructions: instructions , recipeCuisine: cuisineName, cookName: cookName, dishImage: dishImage, rating: Rating, likes: likes , postTime: postTime,)));
                         },
                         cuisineTag: cuisineName ,
                         rating: Rating ,

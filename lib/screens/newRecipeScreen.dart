@@ -462,6 +462,7 @@ class _UploaderState extends State<Uploader> {
       "imageURL": url,
       "Likes": 0,
       "Avg Rating": 3.5,
+      "Post Time": DateTime.now(),
     });
     _firestore.collection("cuisines").document(recipe_cuisine).collection("recipes").document(recipeName).setData({
       "Name": recipeName,
@@ -473,6 +474,7 @@ class _UploaderState extends State<Uploader> {
       "imageURL": url,
       "Likes": 0,
       "Avg Rating": 3.5,
+      "Post Time": DateTime.now(),
     });
   }
   @override
