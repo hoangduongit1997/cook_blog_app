@@ -287,6 +287,10 @@ class _NewRecipeState extends State<NewRecipe> {
                           child: Text("North Indian"),
                         ),
                         DropdownMenuItem(
+                          value: "South Indian",
+                          child: Text("South Indian"),
+                        ),
+                        DropdownMenuItem(
                           value: "Punjabi",
                           child: Text("Punjabi"),
                         ),
