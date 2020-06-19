@@ -1,6 +1,7 @@
 import 'package:cookblog/screens/favouriteRecipes.dart';
 import 'package:cookblog/screens/newRecipeScreen.dart';
 import 'package:cookblog/screens/registrationScreen.dart';
+import 'package:cookblog/screens/userRecipes.dart';
 import 'package:flutter/material.dart';
 import 'package:cookblog/screens/mainScreen.dart';
 import 'package:cookblog/screens/signInScreen.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         'New_Recipe': (context)=>NewRecipe(),
         'user_Details': (context)=>UserProfile(),
         'user_favs': (context)=>FavouriteRecipes(),
+        'User_Recipes': (context)=>UserRecipes(),
       },
     );
   }

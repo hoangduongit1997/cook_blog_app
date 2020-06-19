@@ -19,7 +19,6 @@ class _FavouriteRecipesState extends State<FavouriteRecipes> {
     setState(() {
       email = user.email;
     });
-    print("Got Email!");
   }
   @override
   void initState() {
@@ -46,9 +45,7 @@ class _FavouriteRecipesState extends State<FavouriteRecipes> {
           child: StreamBuilder<QuerySnapshot>(
               stream: _firestore.collection("users").document(email).collection("Liked Recipes").orderBy("Liked Time" , descending: true).snapshots(),
               builder: (context , snapshot){
-                print("In the builder!");
                 if(snapshot.hasData){
-                  print("Snapshot got data");
                   final likedRecipes = snapshot.data.documents;
                   List<Widget> recipeCards = [];
                   for (var recipe in likedRecipes){

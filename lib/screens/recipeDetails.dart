@@ -136,7 +136,6 @@ class _RecipeDetailsState extends State<RecipeDetails> {
           userLikeStatus = true;
           likeIcon = Icons.favorite;
         });
-        print(userLikeStatus);
         return;
       }
     }

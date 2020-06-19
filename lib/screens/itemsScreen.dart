@@ -71,6 +71,20 @@ class _ItemScreenState extends State<ItemScreen> {
               ),
             ),
             ListTile(
+              leading: Icon(Icons.restaurant_menu , color: Color(0xfff2d600) , size: 25),
+              title: Text(
+                'Your recipes',
+                style: TextStyle(
+                  fontSize: 17.5,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: "Segoe UI",
+                ),
+              ),
+              onTap: (){
+                Navigator.pushNamed(context, 'User_Recipes');
+              },
+            ),
+            ListTile(
               leading: Icon(Icons.favorite , color: Color(0xffff1418), size: 25),
               title: Text(
                   'Your favourites',
@@ -85,7 +99,7 @@ class _ItemScreenState extends State<ItemScreen> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.account_circle , color: Color(0xFFF67300) , size: 25),
+              leading: Icon(Icons.account_circle , color: Color(0xFF008DF2) , size: 25),
               title: Text(
                   'Account',
                   style: TextStyle(

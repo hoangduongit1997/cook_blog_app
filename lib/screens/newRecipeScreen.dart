@@ -105,258 +105,258 @@ class _NewRecipeState extends State<NewRecipe> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFCF3EE),
-      appBar: AppBar(
         backgroundColor: Color(0xFFFCF3EE),
-        elevation: 2.5,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back , color: Color(0xFFF67300) , size: 25),
-          onPressed: (){
-            Navigator.pop(context);
-          },
+        appBar: AppBar(
+          backgroundColor: Color(0xFFFCF3EE),
+          elevation: 2.5,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back , color: Color(0xFFF67300) , size: 25),
+            onPressed: (){
+              Navigator.pop(context);
+            },
+          ),
+          title: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                      "New Recipe",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Color(0xFFF67300) , fontSize: 25 )
+                  ),
+                  SizedBox(width: 2.5),
+                  Icon(Icons.fastfood , color: Color(0xFFF67300) , size: 35)
+                ],
+              )
+          ),
         ),
-        title: Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                    "New Recipe",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Color(0xFFF67300) , fontSize: 25 )
-                ),
-                SizedBox(width: 2.5),
-                Icon(Icons.fastfood , color: Color(0xFFF67300) , size: 35)
-              ],
-            )
-        ),
-      ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16 , vertical: 10),
-        child: ListView(
-          children: <Widget>[
-            SizedBox(height: 20),
-            new TextField(
-              onChanged: (value){
-                recipeName = value;
-              },
-              decoration: InputDecoration(
-                hintText: "Introduce us to new dish! ",
-                icon: FaIcon(FontAwesomeIcons.cocktail, color: Color(0xFFF67300) , size: 20),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(17.5)),
-                  borderSide: BorderSide(color: Color(0xFFF67300) , width: 1),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFFF67300), width: 1.0),
-                  borderRadius: BorderRadius.all(Radius.circular(17.5)),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFFF67300), width: 2.0),
-                  borderRadius: BorderRadius.all(Radius.circular(17.5)),
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16 , vertical: 10),
+          child: ListView(
+            children: <Widget>[
+              SizedBox(height: 20),
+              new TextField(
+                onChanged: (value){
+                  recipeName = value;
+                },
+                decoration: InputDecoration(
+                  hintText: "Introduce us to new dish! ",
+                  icon: FaIcon(FontAwesomeIcons.cocktail, color: Color(0xFFF67300) , size: 20),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(17.5)),
+                    borderSide: BorderSide(color: Color(0xFFF67300) , width: 1),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xFFF67300), width: 1.0),
+                    borderRadius: BorderRadius.all(Radius.circular(17.5)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xFFF67300), width: 2.0),
+                    borderRadius: BorderRadius.all(Radius.circular(17.5)),
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Icon(Icons.timelapse , color: Color(0xfff67300), size: 22.5),
-                SizedBox(width: 12.5),
-                new Text(
-                  'Cooking Duration',
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontFamily: "Segoe UI",
-                    fontSize: 18,
-                    color:Color(0xfff67300),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Icon(Icons.timelapse , color: Color(0xfff67300), size: 22.5),
+                  SizedBox(width: 12.5),
+                  new Text(
+                    'Cooking Duration',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontFamily: "Segoe UI",
+                      fontSize: 18,
+                      color:Color(0xfff67300),
+                    ),
                   ),
-                ),
-                SizedBox(width: 2.5),
-                new DropdownButton<int>(
-                    icon: Icon(Icons.keyboard_arrow_down),
-                    items: <DropdownMenuItem<int>>[
-                      DropdownMenuItem(
-                          value: 0,
-                          child: Text("0")
-                      ),
-                      DropdownMenuItem(
-                        value: 1,
-                        child: Text("1")
-                      ),
-                      DropdownMenuItem(
-                        value: 2,
-                        child: Text("2")
-                      ),
-                      DropdownMenuItem(
-                          value: 3,
-                          child: Text("3")
-                      ),
-                      DropdownMenuItem(
-                          value: 4,
-                          child: Text("4")
-                      ),
-                      DropdownMenuItem(
-                          value: 5,
-                          child: Text("5")
-                      ),
-                      DropdownMenuItem(
-                          value: 6,
-                          child: Text("6")
-                      ),
-                      DropdownMenuItem(
-                          value: 7,
-                          child: Text("2")
-                      ),
-                      DropdownMenuItem(
-                          value: 8,
-                          child: Text("8")
-                      ),
-                      DropdownMenuItem(
-                          value: 9,
-                          child: Text("9")
-                      ),
-                      DropdownMenuItem(
-                          value: 10,
-                          child: Text("10")
-                      ),
-                    ],
-                    hint: Text('Hours'),
-                    value: dummy1,
-                    onChanged: (int value){
-                      setState(() {
-                        cooking_time["hours"] = value;
-                        dummy1 = value;
-                      });
-                      print(cooking_time["hours"]);
-                    }
-                ),
-                new DropdownButton<int>(
-                    icon: Icon(Icons.keyboard_arrow_down),
-                    items: makeNumberList(),
-                    value: dummy2,
-                    hint: Text('Minutes'),
-                    onChanged: (int value){
-                      setState(() {
-                        cooking_time["minutes"] = value;
-                        dummy2 = value;
-                      });
-                      print(cooking_time["minutes"]);
-                    }
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                SizedBox(width: 10),
-                Icon(Icons.location_city , color: Color(0xFFF67300) , size: 20),
-                SizedBox(width: 25),
-                DropdownButton<String>(
-                    items: <DropdownMenuItem<String>>[
-                      DropdownMenuItem(
+                  SizedBox(width: 2.5),
+                  new DropdownButton<int>(
+                      icon: Icon(Icons.keyboard_arrow_down),
+                      items: <DropdownMenuItem<int>>[
+                        DropdownMenuItem(
+                            value: 0,
+                            child: Text("0")
+                        ),
+                        DropdownMenuItem(
+                            value: 1,
+                            child: Text("1")
+                        ),
+                        DropdownMenuItem(
+                            value: 2,
+                            child: Text("2")
+                        ),
+                        DropdownMenuItem(
+                            value: 3,
+                            child: Text("3")
+                        ),
+                        DropdownMenuItem(
+                            value: 4,
+                            child: Text("4")
+                        ),
+                        DropdownMenuItem(
+                            value: 5,
+                            child: Text("5")
+                        ),
+                        DropdownMenuItem(
+                            value: 6,
+                            child: Text("6")
+                        ),
+                        DropdownMenuItem(
+                            value: 7,
+                            child: Text("2")
+                        ),
+                        DropdownMenuItem(
+                            value: 8,
+                            child: Text("8")
+                        ),
+                        DropdownMenuItem(
+                            value: 9,
+                            child: Text("9")
+                        ),
+                        DropdownMenuItem(
+                            value: 10,
+                            child: Text("10")
+                        ),
+                      ],
+                      hint: Text('Hours'),
+                      value: dummy1,
+                      onChanged: (int value){
+                        setState(() {
+                          cooking_time["hours"] = value;
+                          dummy1 = value;
+                        });
+                        print(cooking_time["hours"]);
+                      }
+                  ),
+                  new DropdownButton<int>(
+                      icon: Icon(Icons.keyboard_arrow_down),
+                      items: makeNumberList(),
+                      value: dummy2,
+                      hint: Text('Minutes'),
+                      onChanged: (int value){
+                        setState(() {
+                          cooking_time["minutes"] = value;
+                          dummy2 = value;
+                        });
+                        print(cooking_time["minutes"]);
+                      }
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  SizedBox(width: 10),
+                  Icon(Icons.location_city , color: Color(0xFFF67300) , size: 20),
+                  SizedBox(width: 25),
+                  DropdownButton<String>(
+                      items: <DropdownMenuItem<String>>[
+                        DropdownMenuItem(
                           value: "Bengali",
                           child: Text("Bengali"),
-                      ),
-                      DropdownMenuItem(
+                        ),
+                        DropdownMenuItem(
                           value: "Chinese",
                           child: Text("Chinese"),
-                      ),
-                      DropdownMenuItem(
+                        ),
+                        DropdownMenuItem(
                           value: "Continental",
                           child: Text("Continental"),
-                      ),
-                      DropdownMenuItem(
+                        ),
+                        DropdownMenuItem(
                           value: "Goan",
                           child: Text("Goan"),
-                      ),
-                      DropdownMenuItem(
+                        ),
+                        DropdownMenuItem(
                           value: "Gujarati",
                           child: Text("Gujarati"),
-                      ),
-                      DropdownMenuItem(
+                        ),
+                        DropdownMenuItem(
                           value: "Maharashtrian",
                           child: Text("Maharashtrian"),
-                      ),
-                      DropdownMenuItem(
+                        ),
+                        DropdownMenuItem(
                           value: "Mughal",
                           child: Text("Mughal"),
-                      ),
-                      DropdownMenuItem(
+                        ),
+                        DropdownMenuItem(
                           value: "North Indian",
                           child: Text("North Indian"),
-                      ),
-                      DropdownMenuItem(
+                        ),
+                        DropdownMenuItem(
                           value: "Punjabi",
                           child: Text("Punjabi"),
-                      ),
-                      DropdownMenuItem(
+                        ),
+                        DropdownMenuItem(
                           value: "Rajasthani",
                           child: Text("Rajasthani"),
-                      ),
-                      DropdownMenuItem(
+                        ),
+                        DropdownMenuItem(
                           value: "Thai",
                           child: Text("Thai"),
-                      ),
-                      DropdownMenuItem(
-                        value: "Others",
-                        child: Text("Others"),
-                      ),
-                    ],
-                    icon: Icon(Icons.keyboard_arrow_down),
-                    value: recipe_cuisine,
-                    hint: Text("Tell us the cuisine of your recipe!"),
-                    onChanged: (value){
-                      setState(() {
-                        recipe_cuisine = value;
-                      });
-                    }
-                )
-              ],
-            ),
-            SizedBox(height: 20),
-            Row(
+                        ),
+                        DropdownMenuItem(
+                          value: "Others",
+                          child: Text("Others"),
+                        ),
+                      ],
+                      icon: Icon(Icons.keyboard_arrow_down),
+                      value: recipe_cuisine,
+                      hint: Text("Tell us the cuisine of your recipe!"),
+                      onChanged: (value){
+                        setState(() {
+                          recipe_cuisine = value;
+                        });
+                      }
+                  )
+                ],
+              ),
+              SizedBox(height: 20),
+              Row(
                 children: <Widget>[
-                ShadowButton(
-                    text: "Add Ingredients",
-                    icon: Icon(Icons.add_circle_outline , color: Color(0xFFF67300) , size: 20.5),
-                    textSize: 18.5,
-                    width: 170,
-                    height: 40,
-                    press: (){
-                      createAlertDialog(context);
-                    }
-                ),
-                GestureDetector(
-                  child: Chip(
-                    label: Text(
-                        "Remove all",
-                        style: TextStyle(
-                          color: Color(0xFFF67300),
-                          fontSize: 13.5,
-                          fontFamily: 'Segoe UI',
-                        )
-                    ),
-                    avatar: Icon(Icons.cancel , color: Color(0xFFF67300)),
-                    backgroundColor: Color(0xFFFCF3EE),
-                    elevation: 3.5,
-                    shadowColor: Color(0xFFF67300),
+                  ShadowButton(
+                      text: "Add Ingredients",
+                      icon: Icon(Icons.add_circle_outline , color: Color(0xFFF67300) , size: 20.5),
+                      textSize: 18.5,
+                      width: 170,
+                      height: 40,
+                      press: (){
+                        createAlertDialog(context);
+                      }
                   ),
-                  onTap: (){
-                    setState(() {
-                      ingredients = {};
-                      ingredient_name = "";
-                      ingredient_quantity = "";
-                    });
-                    print(ingredients);
-                  },
-                ),
-              ],
-            ),
-            SizedBox(
+                  GestureDetector(
+                    child: Chip(
+                      label: Text(
+                          "Remove all",
+                          style: TextStyle(
+                            color: Color(0xFFF67300),
+                            fontSize: 13.5,
+                            fontFamily: 'Segoe UI',
+                          )
+                      ),
+                      avatar: Icon(Icons.cancel , color: Color(0xFFF67300)),
+                      backgroundColor: Color(0xFFFCF3EE),
+                      elevation: 3.5,
+                      shadowColor: Color(0xFFF67300),
+                    ),
+                    onTap: (){
+                      setState(() {
+                        ingredients = {};
+                        ingredient_name = "";
+                        ingredient_quantity = "";
+                      });
+                      print(ingredients);
+                    },
+                  ),
+                ],
+              ),
+              SizedBox(
                 height: 20,
-            ),
-            Text(
+              ),
+              Text(
                 "Added $ingredient_quantity amount of $ingredient_name",
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -364,47 +364,47 @@ class _NewRecipeState extends State<NewRecipe> {
                   fontSize: 17.5,
                   fontFamily: "Segoe UI",
                 ),
-            ),
-            SizedBox(height: 20),
-            ShadowButton(
-                text: "Pick Image",
-                icon: Icon(Icons.image , color: Color(0xFFF67300) , size: 25),
-                textSize: 22.5,
-                width: 225,
-                height: 40,
-                press: (){
-                  _pickImage(ImageSource.gallery);
-                }
-            ),
-            SizedBox(height: 20),
-            new TextField(
-              keyboardType: TextInputType.multiline,
-              onChanged: (value){
-                instructions = value;
-              },
-              maxLines: 20,
-              decoration: InputDecoration(
-                hintText: "Cooking Instructions",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(17.5)),
-                  borderSide: BorderSide(color: Color(0xFFF67300) , width: 1),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFFF67300), width: 1.0),
-                  borderRadius: BorderRadius.all(Radius.circular(17.5)),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFFF67300), width: 2.0),
-                  borderRadius: BorderRadius.all(Radius.circular(17.5)),
+              ),
+              SizedBox(height: 20),
+              new TextField(
+                keyboardType: TextInputType.multiline,
+                onChanged: (value){
+                  instructions = value;
+                },
+                maxLines: 20,
+                decoration: InputDecoration(
+                  hintText: "Cooking Instructions",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(17.5)),
+                    borderSide: BorderSide(color: Color(0xFFF67300) , width: 1),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xFFF67300), width: 1.0),
+                    borderRadius: BorderRadius.all(Radius.circular(17.5)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xFFF67300), width: 2.0),
+                    borderRadius: BorderRadius.all(Radius.circular(17.5)),
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 20),
-            Uploader(file: _imageFile , recipeName: recipeName , instructions: instructions , ingredients: ingredients , duration: cooking_time , recipeCuisine: recipe_cuisine),
-            SizedBox(height: 20),
-          ],
-        ),
-      )
+              SizedBox(height: 20),
+              ShadowButton(
+                  text: "Pick Image",
+                  icon: Icon(Icons.image , color: Color(0xFFF67300) , size: 25),
+                  textSize: 22.5,
+                  width: 225,
+                  height: 40,
+                  press: (){
+                    _pickImage(ImageSource.gallery);
+                  }
+              ),
+              SizedBox(height: 20),
+              Uploader(file: _imageFile , recipeName: recipeName , instructions: instructions , ingredients: ingredients , duration: cooking_time , recipeCuisine: recipe_cuisine),
+              SizedBox(height: 20),
+            ],
+          ),
+        )
     );
   }
 }
@@ -476,18 +476,6 @@ class _UploaderState extends State<Uploader> {
       "Avg Rating": 3.5,
       "Post Time": DateTime.now(),
     });
-    _firestore.collection("users").document(user.email).collection("My Recipes").document(recipeName).setData({
-      "Name": recipeName,
-      "Cook Name": UserName,
-      "Cooking Duration": duration,
-      "Cuisine": recipe_cuisine,
-      "Ingredients": ingredients,
-      "Instructions": instructions,
-      "imageURL": url,
-      "Likes": 0,
-      "Avg Rating": 3.5,
-      "Post Time": DateTime.now(),
-    });
   }
   @override
   void initState() {
@@ -498,33 +486,33 @@ class _UploaderState extends State<Uploader> {
   Widget build(BuildContext context) {
     if(_uploadTask != null){
       return StreamBuilder<StorageTaskEvent>(
-        stream: _uploadTask.events,
-        builder: (context , snapshot){
-          var event = snapshot?.data?.snapshot;
-          double progressPercent = event != null ? event.bytesTransferred/event.totalByteCount : 0;
-          return Column(
-            children: <Widget>[
-              if(_uploadTask.isComplete)
-                Text(
+          stream: _uploadTask.events,
+          builder: (context , snapshot){
+            var event = snapshot?.data?.snapshot;
+            double progressPercent = event != null ? event.bytesTransferred/event.totalByteCount : 0;
+            return Column(
+              children: <Widget>[
+                if(_uploadTask.isComplete)
+                  Text(
                     "Recipe Upload Successful",
                     style: TextStyle(
                       color: Color(0xFFF67300),
                       fontSize: 17.5,
                       fontFamily: "Segoe UI",
                     ),
-                ),
-              LinearProgressIndicator(value: progressPercent),
-              Text(
+                  ),
+                LinearProgressIndicator(value: progressPercent),
+                Text(
                   "${(progressPercent*100).toStringAsFixed(2)}",
                   style: TextStyle(
                     color: Color(0xFFF67300),
                     fontSize: 17.5,
                     fontFamily: "Segoe UI",
+                  ),
                 ),
-              ),
-            ],
-          );
-        }
+              ],
+            );
+          }
       );
     }
     else{
@@ -535,9 +523,16 @@ class _UploaderState extends State<Uploader> {
           height: 40,
           press:  (){
             postRecipe(widget.recipeName, widget.instructions, widget.ingredients, widget.duration, widget.recipeCuisine);
+            DocumentReference recipeReference = _firestore.collection("recipes").document("${widget.recipeName}");
+            _firestore.collection("users").document(user.email).collection("My Recipes").document("${widget.recipeName}").setData({
+              "Reference": recipeReference,
+            });
           },
           icon: Icon(Icons.send , color: Color(0xFFF67300) , size: 20.5));
     }
   }
 }
 
+//  void postRecipeReference(String recipeName){
+
+//  }
